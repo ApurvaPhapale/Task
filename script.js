@@ -47,6 +47,7 @@ function createTaskCard(title, description, id) {
     <p>${description}</p>
   `;
 
+  // Add dragstart event for the card
   taskCard.addEventListener('dragstart', (e) => {
     e.dataTransfer.setData('text/plain', id);
   });
@@ -58,10 +59,16 @@ function createTaskCard(title, description, id) {
 taskForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const taskTitle = document.getElementById('taskTitle').value;
-  const taskDescription = document.getElementById('taskDescription').value;
+  const taskTitle = document.getElementById('taskTitle').value.trim();
+  const taskDescription = document.getElementById('taskDescription').value.trim();
   const taskStatus = document.getElementById('taskStatus').value;
   const taskId = `task-${Date.now()}`;
+
+  // Validate input
+  if (!taskTitle) {
+    alert('Task title cannot be empty!');
+    return;
+  }
 
   // Create Task Object
   const newTask = {
@@ -100,5 +107,22 @@ document.querySelectorAll('.task-list').forEach((list) => {
     const taskCard = document.getElementById(taskId);
 
     if (taskCard) {
-      list.appendChild(taskCard);
- 
+      list.appendChild(taskCard); // Move the task card to the new list
+
+      // Update task status in localStorage
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      const taskIndex = tasks.findIndex((task) => task.id === taskId);
+      if (taskIndex !== -1) {
+        tasks[taskIndex].status = list.getAttribute('data-status');
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+      }
+    }
+
+    list.classList.remove('drag-over');
+  });
+});
+
+// Load tasks on page load
+document.addEventListener('DOMContentLoaded', () => {
+  loadTasks();
+});

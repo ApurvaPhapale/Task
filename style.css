@@ -31,6 +31,13 @@
     padding: 1rem;
     border-right: 1px solid #ddd;
   }
+  body {
+    background-image: url('https://www.shutterstock.com/image-illustration/internet-business-technology-network-concept-260nw-2113601942.jpg'); /* Replace with the path to your image */
+    background-size: cover; /* Makes the image cover the entire background */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-position: center; /* Centers the image */
+}
+
   
   .sidebar button {
     display: block;
