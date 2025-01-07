@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Management Tool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Task Management Tool</h1>
+  </header>
+  <main>
+    <div class="sidebar">
+      <button id="addTaskBtn">+ Add Task</button>
+      <ul>
+        <li class="filter active" data-status="all">All Tasks</li>
+        <li class="filter" data-status="to-do">To-Do</li>
+        <li class="filter" data-status="in-progress">In Progress</li>
+        <li class="filter" data-status="done">Done</li>
+      </ul>
+    </div>
+    <div class="task-board">
+      <div class="task-column" data-status="to-do">
+        <h2>To-Do</h2>
+        <div class="task-list" id="to-do"></div>
+      </div>
+      <div class="task-column" data-status="in-progress">
+        <h2>In Progress</h2>
+        <div class="task-list" id="in-progress"></div>
+      </div>
+      <div class="task-column" data-status="done">
+        <h2>Done</h2>
+        <div class="task-list" id="done"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Task Modal -->
+  <div id="taskModal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Create Task</h2>
+      <form id="taskForm">
+        <label for="taskTitle">Task Title:</label>
+        <input type="text" id="taskTitle" required>
+        <label for="taskDescription">Description:</label>
+        <textarea id="taskDescription"></textarea>
+        <label for="taskStatus">Status:</label>
+        <select id="taskStatus">
+          <option value="to-do">To-Do</option>
+          <option value="in-progress">In Progress</option>
+          <option value="done">Done</option>
+        </select>
+        <button type="submit">Save</button>
+        <button type="button" id="closeModal">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
